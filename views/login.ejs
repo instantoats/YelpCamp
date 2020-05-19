@@ -1,0 +1,19 @@
+<%- include("./partials/header") %>
+
+<div class="row h-50 mx-auto justify-content-center align-items-center">
+	<form class="form-signin" style="width: 500px;" action="/login" method="POST">
+		<h1 class="h3 mb-3 font-weight-normal text-center">Log in</h1>
+		<label for="inputUsername" class="sr-only">Username</label>
+		<input type="text" id="inputUsername" class="form-control mb-1" name="username" placeholder="Username" required autofocus>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" id="inputPassword" class="form-control mb-1" name="password" placeholder="Password" required>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+			<div class="form-signin">
+				<a href="/campgrounds">Go Back</a>
+			</div>
+	</form>
+</div>
+
+
+	
+<%- include("./partials/footer") %>

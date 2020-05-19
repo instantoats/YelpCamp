@@ -1,0 +1,99 @@
+<%- include("../partials/header") %>
+
+<div class="row">
+  <div class="col-md-3">
+    <div id="map"></div>
+  </div>
+  <div class="col-md-9">
+    <div class="card mb-3">
+      <img class="mx-auto d-block mt-2" style="width:35%;" src="<%= campground.image %>" alt="<%= campground.name %>">		
+      <div class="card-body">
+        <p id="cgNameDisplay" class="underline"><%= campground.name %></p>
+			<p class="float-right" id="cgCostDisplay">$<%= campground.cost %>/night</p>
+		  	<hr>
+			<p class="float-right ml-5">Campground submitted by: <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a></p>
+	        <p class="card-text"><em><%= campground.description %></em></p>
+			<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+				<div class="btn-toolbar float-right">
+					<a class="btn btn-warning btn-sm mr-2" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+					<form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST" class="delete-form">
+						<button class="btn btn-sm btn-danger">Delete</button>
+					</form>
+				</div>
+		    <% } %>
+       </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+			 <div class="text-center" style="font-size: 20px;"> How happy are their campers?</div>
+			 <hr>
+			 <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+				<div >
+					 <textarea class="form-control" rows="2" id="comment" name="comment[text]" placeholder="How was your stay at <%= campground.name %>?"></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success float-right mt-1">Submit</button>
+				</div>
+			</form>
+        		<div class="row">
+       			<% campground.comments.forEach(function(comment){ %>
+			  <div class="col-md-12 mb-2">
+				<div class="card border-0">
+				  <div class="card-body">
+					<div class="float-left">
+					  <p class="card-title"><strong><%= comment.author.username %></strong></p>
+					  <p class="card-text"><%= comment.text %></p>
+					</div> 
+					<div class="float-right">	
+					 <p style="font-size: small;"><%= moment(comment.createdAt).fromNow() %></p>
+					  <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+					   <div class="btn-toolbar float-right">
+						<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit" class="btn btn-sm btn-warning mr-2">Edit</a>
+						<form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+						  <button class="btn btn-sm btn-danger">Delete</button>
+						</form>	      
+					  </div>
+					  <% } %>
+					</div>
+				  </div>
+					  <hr>
+				</div>
+			  </div>
+			<% }) %>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<script>
+  function initMap() {
+    var lat = <%= campground.lat %>;
+    var lng = <%= campground.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= campground.name %><br />
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_API_KEY&callback=initMap"></script>
+
+<%- include("../partials/footer") %>
