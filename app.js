@@ -22,15 +22,12 @@ var commentRoutes 		= require("./routes/comments"),
 	indexRoutes 		= require("./routes/index")
 
 app.use(favicon(path.join(__dirname,'public', 'favicon.ico')));
+app.use(express.static(__dirname + "/public"));
 
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
 
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
-
-// // This is an alternative that offers a fallback option. If DATABASEURL is empty, use mongodb: etc
-// var url = process.env.DATABASEURL || ""
-// mongoose.connect(url, {useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");

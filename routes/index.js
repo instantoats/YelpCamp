@@ -20,6 +20,13 @@ router.get("/register", function(req, res){
    res.render("register", {page: 'register'}); 
 });
 
+// Show Prepare page
+router.get("/prepare", function(req, res){
+	res.render("prepare"); 
+ });
+
+
+
 // Handle sign up logic
 router.post("/register", function(req, res){
 	var newUser = new User(

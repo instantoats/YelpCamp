@@ -102,12 +102,15 @@ body {
 .yelp {
   font-family: 'Courgette', cursive;
   margin-bottom: 1rem;
+  color: white;
 }
 
 .jumbotron {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  border-radius: 0px;
   text-align: center;
+  background-image: url('/images/po.jpg');
+  height: 500px; /* You must set a specified height */
+  background-size: 100% 100%; /* Resize the background image to cover the entire container */
 }
 
 #navUsername {
@@ -121,7 +124,7 @@ body {
 
 .navbar {
   height: 50px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .navbar-brand {
@@ -152,3 +155,29 @@ body {
   flex-wrap: wrap; 
 }
 
+.container1 {
+   display: inline-flex;  
+} 
+
+.flex-container {
+  flex-direction: row;
+}
+
+.flex-item {
+  background: tomato;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  margin-top: 10px;
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+} 
+
+.profileUsername {
+  margin-top: 5px;
+  font-family: Almendra, serif;
+  /* font-size: ; */
+}

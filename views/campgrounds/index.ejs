@@ -1,22 +1,29 @@
 <%- include("../partials/header") %>
 
-<header class="jumbotron">
-	<div class="container">
-	<h1 style="font-size:2.75em;" class="yelp">Welcome to YelpCamp!</h1>
-	<p style="font-size:1.5em;" class="yelp">Find the perfect campground hand-picked by those that know best. <br>	You, the campers.</p>	
-		<div class="row justify-content-center">
-			<a class="btn btn-success mr-5" color="#225500" href="/campgrounds/new">Add New Campground</a>
-			<form action="/campgrounds" method="GET" class="form-inline" id="campground-search">
-				<input type="text" name="search" placeholder="Search for a campground" class="form-control mr-1">
-				<input type="submit" value="Search" class="btn btn-success">
-			</form>
-		</div>
-		<% if(noMatch !== null) { %>
-		<h3><hr><%= noMatch %></h3>
-		<% } %>
-	</div>
-</header>
+</div>
+	<header class="jumbotron">
+		<div class="container">
+			<div class="container index">
+				<h1 style="font-size:2.75em;" class="yelp">Welcome to YelpCamp!</h1><br>
+				
+					<div class="row justify-content-center">
+						<a class="btn btn-success mr-5" color="#225500" href="/campgrounds/new">Add New Campground</a>
+						<form action="/campgrounds" method="GET" class="form-inline" id="campground-search">
+							<input type="text" name="search" placeholder="Search for a campground" class="form-control mr-2" style="width: 225px;">
+							<input type="submit" value="Search" class="btn btn-success">
+						</form>
+					</div><br><br>
+						<p style="font-size:1.5em;" class="yelp">Find the perfect campground hand-picked by those that know best. <br>	
+						<b>You</b>, the campers.</p>	
+					<% if(noMatch !== null) { %>
+					<h3><hr><%= noMatch %></h3>
+					<% } %>
+			</div>
+		</div>	
+	</header>
+	
 
+<div class="container">
 
 <div class="row text-center">
 	<% campgrounds.forEach(function(campground){ %>
@@ -31,5 +38,6 @@
 		</div>
 	<% }); %>
 </div> 
+
 
 <%- include("../partials/footer") %>
